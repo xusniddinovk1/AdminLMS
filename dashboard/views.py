@@ -18,8 +18,8 @@ def logout_page(request):
 
 def login_page(request):
     if request.POST:
-        username = request.POST.get("username ")
-        password = request.POST.get('password')
+        username = request.POST.get("username")
+        password = request.POST.get("password")
         user = authenticate(request, username=username, password=password)
         if user is None:
             login(request, user)
