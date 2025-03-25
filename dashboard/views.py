@@ -113,3 +113,24 @@ def chair_create(request):
         "form": form
     }
     return render(request, "chair/form.html", ctx)
+
+
+@login_required_decorator
+def chair_edit(request, pk):
+    model = Chairs.objects.get(pk=pk)
+    form = ChairForm(request.POST or None, instance=model)
+    if request.POST and form.is_valid():
+        form.save()
+
+        actions = request.session.get("actions", [])
+        actions += ["You edited chair: "]
+        request.session["actions"] = actions
+
+        return redirect("chair_list")
+    ctx = {
+        "model": model,
+        "form": form
+    }
+    return render(request, "chair/form.html", ctx)
+
+
