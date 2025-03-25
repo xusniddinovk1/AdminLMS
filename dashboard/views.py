@@ -46,3 +46,16 @@ def home_page(request):
     }
     return render(request, "index.html", ctx)
 
+
+@login_required_decorator
+def faculty_create(request):
+    model = Faculties()
+    form = FacultyForm(request.POST or None, instance=model)
+    if request.POST and form.is_valid():
+        form.save()
+        return redirect("faculty_list")
+    ctx = {
+        "model": model,
+        "form": form
+    }
+    return render(request, "faculty/form.html", ctx)
