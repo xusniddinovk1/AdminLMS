@@ -89,4 +89,4 @@ def faculty_list(request):
     ctx = {
         "faculties": faculties
     }
-    return render(request, "faculty/list.html")
+    return render(request, "faculty/list.html", ctx)
