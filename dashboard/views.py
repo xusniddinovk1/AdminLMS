@@ -73,3 +73,10 @@ def faculty_edit(request, pk):
         "form": form
     }
     return render(request, "faculty/form.html", ctx)
+
+
+@login_required_decorator
+def faculty_delete(request, pk):
+    model = Faculties.objects.get(pk=pk)
+    model.delete()
+    return redirect("faculty_list")
