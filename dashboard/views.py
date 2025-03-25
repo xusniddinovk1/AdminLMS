@@ -315,7 +315,7 @@ def student_edit(request, pk):
 
 
 @login_required_decorator
-def group_delete(request, pk):
+def student_delete(request, pk):
     model = Students.objects.get(pk=pk)
     model.delete()
     return redirect("student_list")
