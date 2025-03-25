@@ -12,7 +12,7 @@ class Faculties(models.Model):
 class Chairs(models.Model):
     objects = None
     name = models.CharField(max_length=100, null=False, blank=False)
-    faculty = models.ForeignKey(Faculties, null=False, on_delete=models.SET_NULL)
+    faculty = models.ForeignKey(Faculties, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.name
@@ -21,8 +21,8 @@ class Chairs(models.Model):
 class Groups(models.Model):
     objects = None
     name = models.CharField(max_length=100, null=False, blank=False)
-    faculty = models.ForeignKey(Faculties, null=False, on_delete=models.SET_NULL)
-    chair = models.ForeignKey(Chairs, null=False, on_delete=models.SET_NULL)
+    faculty = models.ForeignKey(Faculties, null=True, on_delete=models.SET_NULL)
+    chair = models.ForeignKey(Chairs, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.name
@@ -38,7 +38,7 @@ class Students(models.Model):
     first_name = models.CharField(max_length=100, null=False, blank=False)
     last_name = models.CharField(max_length=100, null=False, blank=False)
     age = models.IntegerField()
-    group = models.ForeignKey(Groups, null=False, on_delete=models.SET_NULL)
+    group = models.ForeignKey(Groups, null=True, on_delete=models.SET_NULL)
     image = models.ImageField(upload_to="images")
 
     def __str__(self):
@@ -50,8 +50,8 @@ class Teachers(models.Model):
     first_name = models.CharField(max_length=100, null=False, blank=False)
     last_name = models.CharField(max_length=100, null=False, blank=False)
     age = models.IntegerField()
-    subject = models.ForeignKey(Subjects, null=False, on_delete=models.SET_NULL)
-    chair = models.ForeignKey(Chairs, null=False, on_delete=models.SET_NULL)
+    subject = models.ForeignKey(Subjects, null=True, on_delete=models.SET_NULL)
+    chair = models.ForeignKey(Chairs, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
