@@ -80,3 +80,13 @@ def faculty_delete(request, pk):
     model = Faculties.objects.get(pk=pk)
     model.delete()
     return redirect("faculty_list")
+
+
+@login_required_decorator
+def faculty_list(request):
+    faculties = services.get_faculties()
+    print(faculties)
+    ctx = {
+        "faculties": faculties
+    }
+    return render(request, "faculty/list.html")
