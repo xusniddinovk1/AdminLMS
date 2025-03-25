@@ -49,7 +49,7 @@ class Teachers(models.Model):
     objects = None
     first_name = models.CharField(max_length=100, null=False, blank=False)
     last_name = models.CharField(max_length=100, null=False, blank=False)
-    age = models.IntegerField()
+    age = models.IntegerField(null=False, blank=False)
     subject = models.ForeignKey(Subjects, null=True, on_delete=models.SET_NULL)
     chair = models.ForeignKey(Chairs, null=True, on_delete=models.SET_NULL)
 
