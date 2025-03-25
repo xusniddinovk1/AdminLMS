@@ -90,3 +90,26 @@ def faculty_list(request):
         "faculties": faculties
     }
     return render(request, "faculty/list.html", ctx)
+
+
+@login_required_decorator
+def chair_create(request):
+    model = Chairs()
+    form = ChairForm(request.POST or None, instance=model)
+    if request.POST and form.is_valid():
+        form.save()
+
+        actions = request.session.get("actions", [])
+        actions += [f"You created: "]
+        request.session["actions"] = actions
+
+        chair_count = request.session.get("chair_count", 0)
+        chair_count += 1
+        request.session["chair_count"] = chair_count
+
+        return redirect("chair_list")
+    ctx = {
+        "model": model,
+        "form": form
+    }
+    return render(request, "chair/form.html", ctx)
